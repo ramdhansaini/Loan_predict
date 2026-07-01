@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../Static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Loan Prediction</h1>
+        <form action="/predict" method="post">
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender">
+                <option value   ="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            <label for="age">Age:</label>
+            <input type="number" name="age" placeholder="Age" 
+            label="Age"
+            required>
+            <label for="income">Income:</label>
+            <input type="number" name="income" placeholder="Income" 
+            label="Income"
+            required>
+            <label for="loan_amount">Loan Amount:</label>
+            <input type="number" name="loan_amount" placeholder="Loan Amount" 
+            label="Loan Amount"
+            required>
+            <label for="person_emp_length">Loan Term:</label>
+            <select name="person_emp_length" id="person_emp_length">
+                <option value="Short">Short</option>
+                <option value="Medium">Medium</option>
+                <option value="Long">Long</option>
+            </select>
+            <label for="person_home_ownership">Home Ownership:</label>
+            <select name="person_home_ownership" id="person_home_ownership">
+                <option value="RENT">Rent</option>
+                <option value="MORTGAGE">Mortgage</option>
+                <option value="OWN">Own</option>
+            </select>
+            <br>
+            <label for="credit_score">Credit Score:</label>
+            <input type="number" name="credit_score" placeholder="Credit Score" 
+            label="Credit Score"
+            required>
+            <br><br>
+            <input type="submit" value="Predict">
+            <br><br>
+            <label for ="Loan Status">Loan Status:</label>
+            <input type="text" name="loan_status" id="loan_status" readonly>
+        </form>
+    </div>
+</body>
+</html>
