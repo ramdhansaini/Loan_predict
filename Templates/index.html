@@ -10,39 +10,76 @@
     <div class="container">
         <h1>Loan Prediction</h1>
         <form action="/predict" method="post">
-            <label for="gender">Gender:</label>
-            <select name="gender" id="gender">
-                <option value   ="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
             <label for="age">Age:</label>
             <input type="number" name="age" placeholder="Age" 
             label="Age"
             required>
+            <br><br>
             <label for="income">Income:</label>
             <input type="number" name="income" placeholder="Income" 
             label="Income"
             required>
-            <label for="loan_amount">Loan Amount:</label>
-            <input type="number" name="loan_amount" placeholder="Loan Amount" 
-            label="Loan Amount"
-            required>
-            <label for="person_emp_length">Loan Term:</label>
-            <select name="person_emp_length" id="person_emp_length">
-                <option value="Short">Short</option>
-                <option value="Medium">Medium</option>
-                <option value="Long">Long</option>
-            </select>
+            <br><br>
             <label for="person_home_ownership">Home Ownership:</label>
             <select name="person_home_ownership" id="person_home_ownership">
+                <option value="">Select Home Ownership
                 <option value="RENT">Rent</option>
                 <option value="MORTGAGE">Mortgage</option>
                 <option value="OWN">Own</option>
             </select>
-            <br>
-            <label for="credit_score">Credit Score:</label>
-            <input type="number" name="credit_score" placeholder="Credit Score" 
-            label="Credit Score"
+            <br><br>
+            <label for="person_emp_length">Loan Term:</label>
+            <input type="number" name="person_emp_length" id="person_emp_length"
+            placeholder="Loan Term"
+            label="Loan Term"
+            required>
+            <br><br>
+            <label for="loan_intent">Loan intent:</label>
+            <select name="loan_intent" id="loan_intent">
+                <option value="">Select Loan Intent</option>
+                <option value="PERSONAL">Personal</option>
+                <option value="HOME_IMPROVEMENT">Home Improvement</option>
+                <option value="MEDICAL">MEDICAL</option>
+                <option value="EDUCATION">Education</option>
+            </select>
+            <br><br>
+            <label for="loan_grade">Loan Grade:</label>
+            <select name="loan_grade" id="loan_grade">
+                <option value="">Select Loan Grade</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+                <option value="G">G</option>
+            </select>
+            <br><br>
+            <label for="loan_amount">Loan Amount:</label>
+            <input type="number" name="loan_amount" placeholder="Loan Amount" 
+            label="Loan Amount"
+            required>
+            <br><br>
+            <label for="loan_int_rate">Loan Interest Rate:</label>
+            <input type="number" name="loan_int_rate" placeholder="Loan Interest Rate" 
+            label="Loan Interest Rate"
+            required>
+            <br><br>
+            <label for="loan_percent_income">Loan Percent Income:</label>
+            <input type="number" name="loan_percent_income" placeholder="Loan Percent Income"
+            label="Loan Percent Income"
+            required>
+            <br><br>
+            <label for="cb_person_default_on_file">Default on File:</label>
+            <select name="cb_person_default_on_file" id="cb_person_default_on_file">
+                <option value="">Select Default on File</option>
+                <option value="Y">Yes</option>
+                <option value="N">No</option>
+            </select>
+            <br><br>
+            <label for="cb_person_cred_hist_length">Credit History Length:</label>
+            <input type="number" name="cb_person_cred_hist_length" placeholder="Credit History Length"
+            label="Credit History Length"
             required>
             <br><br>
             <input type="submit" value="Predict">
