@@ -9,6 +9,9 @@
 <body>
     <div class="container">
         <h1>Loan Prediction</h1>
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
         <form action="/predict" method="post">
             <label for="age">Age:</label>
             <input type="number" name="age" placeholder="Age" 
@@ -21,8 +24,8 @@
             required>
             <br><br>
             <label for="person_home_ownership">Home Ownership:</label>
-            <select name="person_home_ownership" id="person_home_ownership">
-                <option value="">Select Home Ownership
+            <select name="person_home_ownership" id="person_home_ownership" required>
+                <option value="">Select Home Ownership</option>
                 <option value="RENT">Rent</option>
                 <option value="MORTGAGE">Mortgage</option>
                 <option value="OWN">Own</option>
@@ -35,16 +38,18 @@
             required>
             <br><br>
             <label for="loan_intent">Loan intent:</label>
-            <select name="loan_intent" id="loan_intent">
+            <select name="loan_intent" id="loan_intent" required>
                 <option value="">Select Loan Intent</option>
                 <option value="PERSONAL">Personal</option>
-                <option value="HOME_IMPROVEMENT">Home Improvement</option>
+                <option value="HOMEIMPROVEMENT">Home Improvement</option>
                 <option value="MEDICAL">MEDICAL</option>
                 <option value="EDUCATION">Education</option>
+                <option value="DEBTCONSOLIDATION">Debt Consolidation</option>
+                <option value="VENTURE">Venture</option>
             </select>
             <br><br>
             <label for="loan_grade">Loan Grade:</label>
-            <select name="loan_grade" id="loan_grade">
+            <select name="loan_grade" id="loan_grade" required>
                 <option value="">Select Loan Grade</option>
                 <option value="A">A</option>
                 <option value="B">B</option>
@@ -71,7 +76,7 @@
             required>
             <br><br>
             <label for="cb_person_default_on_file">Default on File:</label>
-            <select name="cb_person_default_on_file" id="cb_person_default_on_file">
+            <select name="cb_person_default_on_file" id="cb_person_default_on_file" required>
                 <option value="">Select Default on File</option>
                 <option value="Y">Yes</option>
                 <option value="N">No</option>

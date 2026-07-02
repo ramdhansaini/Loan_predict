@@ -11,6 +11,32 @@ with open(model_path,"rb") as f:
     model = pickle.load(f)
 with open(scaler_path,"rb") as f:
     scaler = pickle.load(f)
+
+HOME_OWNERSHIP_MAP = {
+    "MORTGAGE": 0,
+    "OTHER": 1,
+    "OWN": 2,
+    "RENT": 3,
+}
+LOAN_INTENT_MAP = {
+    "DEBTCONSOLIDATION": 0,
+    "EDUCATION": 1,
+    "HOMEIMPROVEMENT": 2,
+    "MEDICAL": 3,
+    "PERSONAL": 4,
+    "VENTURE": 5,
+}
+LOAN_GRADE_MAP = {
+    "A": 0,
+    "B": 1,
+    "C": 2,
+    "D": 3,
+    "E": 4,
+    "F": 5,
+    "G": 6,
+}
+DEFAULT_ON_FILE_MAP = {"N": 0, "Y": 1}
+
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -18,24 +44,33 @@ def home():
 def predict():
     age = int(request.form["age"])
     income = int(request.form["income"])
-    person_ownership = request.form["person_home_ownership"]
+    person_ownership = HOME_OWNERSHIP_MAP.get(request.form.get("person_home_ownership", ""))
     person_emp_length = int(request.form["person_emp_length"])
-    loan_amount = int(request.form["loan_amount"])
+    loan_amount = float(request.form["loan_amount"])
     loan_int_rate = float(request.form["loan_int_rate"])
-    loan_intent = request.form["loan_intent"]
-    loan_grade = request.form["loan_grade"]
+    loan_intent = LOAN_INTENT_MAP.get(request.form.get("loan_intent", ""))
+    loan_grade = LOAN_GRADE_MAP.get(request.form.get("loan_grade", ""))
     loan_percent_income = float(request.form["loan_percent_income"])
-    cb_person_default_on_file = request.form["cb_person_default_on_file"]
+    cb_person_default_on_file = DEFAULT_ON_FILE_MAP.get(request.form.get("cb_person_default_on_file", ""))
     cb_person_cred_hist_length = int(request.form["cb_person_cred_hist_length"])
-    
-    # Add more form fields as needed
-    # Example:
-    #  could not convert string to float: np.str_('')
 
-    # Create a numpy array with the input values
-    input_data = np.array([[age, income, loan_amount, loan_int_rate, loan_intent, loan_grade, loan_percent_income, cb_person_default_on_file, cb_person_cred_hist_length  ]])
+    if None in (person_ownership, loan_intent, loan_grade, cb_person_default_on_file):
+        return render_template("index.html", error="Please complete all dropdown selections.")
 
-    # Scale the input data
+    input_data = np.array([[
+        age,
+        income,
+        person_ownership,
+        person_emp_length,
+        loan_intent,
+        loan_grade,
+        loan_amount,
+        loan_int_rate,
+        loan_percent_income,
+        cb_person_default_on_file,
+        cb_person_cred_hist_length,
+    ]], dtype=float)
+
     input_data_scaled = scaler.transform(input_data)
 
     # Make the prediction
